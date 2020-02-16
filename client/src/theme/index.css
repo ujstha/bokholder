@@ -1,0 +1,42 @@
+.md,
+.ios {
+  font-family: "Raleway", sans-serif;
+}
+.font-family-raleway {
+  font-family: "Raleway", sans-serif;
+}
+.font-family-vollkorn-sc {
+  font-family: "Vollkorn SC", serif, sans-serif;
+}
+.font-family-work-sans {
+  font-family: "Work Sans", serif, sans-serif;
+}
+ion-title {
+  text-transform: capitalize;
+}
+.md ion-content,
+.ios ion-content {
+  margin-top: 50px;
+}
+.ant-tag {
+  line-height: 30px !important;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}
+.ant-tag:hover,
+.book-single:hover {
+  cursor: pointer;
+}
+.book-single:hover {
+  background-color: rgba(0, 0, 0, 0.6) !important;
+  transition: background-color ease-in 0.5s !important;
+}
+.type-book-list .book-single:hover,
+.genre-book-list .book-single:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.type-book-list .book-single:hover span h4,
+.type-book-list ion-card.book-single:hover span p {
+  color: #fff !important;
+  transition: all ease-in 0.5s;
+}

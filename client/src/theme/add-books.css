@@ -1,0 +1,34 @@
+input[type="file"] {
+  display: none !important;
+}
+.file-upload-button {
+  border: 1px solid #d9d9d9;
+  display: block;
+  max-width: 100%;
+  padding: 8px 16px;
+  cursor: pointer;
+  background-color: #fff;
+  font-size: 15px;
+  color: rgba(0,0,0,.65);
+  border-radius: 3px;
+  line-height: 20px;
+}
+.file-upload-button .file-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.edit-btn,
+.cancel-btn,
+.save-btn,
+.reset-btn {
+  width: calc(50% - 5px);
+}
+.edit-btn,
+.save-btn {
+  margin-left: 5px;
+}
+.cancel-btn,
+.reset-btn {
+  margin-right: 5px;
+}

@@ -1,0 +1,98 @@
+.book_by_id .poster-container {
+  position: relative;
+}
+.book_by_id .poster-underlay {
+  height: 400px;
+  width: 100%;
+  left: 0;
+  top: 0;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: blur(15px) brightness(80%);
+}
+.book_by_id .book-poster {
+  position: absolute;
+  object-fit: cover;
+  width: 280px !important;
+  min-height: 400px !important;
+}
+.book-details {
+  position: relative;
+}
+.book-details .book-description {
+  display: block;
+  font-size: 18px;
+  word-spacing: 8px !important;
+  text-align: left;
+}
+.book-details span.book-description::first-letter {
+  font-size: 20px;
+  text-transform: uppercase !important;
+}
+.book-details h1 span.book-author,
+.book-details h1 span.book-released,
+.book-details h1 span.book-publisher,
+.book-details h1 span.book-isbn {
+  display: block;
+  font-family: "Raleway", sans-serif;
+  font-size: 16px;
+  margin-top: 5px;
+}
+@media screen and (max-width: 767px) {
+  .book_by_id .poster-container .poster-underlay {
+    height: 300px;
+    width: 100%;
+  }
+  .book_by_id .book-poster {
+    width: 200px !important;
+    min-height: 300px !important;
+  }
+  .book-details {
+    text-align: center !important;
+  }
+  .book-details .book-description {
+    font-size: 16px;
+    word-spacing: 6px !important;
+  }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .book_by_id .poster-container .poster-underlay {
+    height: 400px;
+    width: 100%;
+  }
+  .book_by_id .book-poster {
+    width: 300px !important;
+    min-height: 400px !important;
+  }
+}
+@media (min-width: 1024px) and (max-width: 1365px) {
+  .book_by_id .poster-container .poster-underlay {
+    height: 400px;
+    width: 100%;
+  }
+  .book_by_id .book-poster {
+    width: 300px !important;
+    min-height: 400px !important;
+  }
+}
+.type-book-list {
+  position: relative;
+  bottom: 0;
+}
+.type-book-list .books__container {
+  display: flex;
+  flex-direction: row;
+}
+.type-book-list .book-single {
+  min-width: 210px !important;
+  max-width: 210px !important;
+  border-radius: 4px;
+  background-color: transparent;
+  color: whitesmoke;
+  overflow: hidden;
+}
+.type-book-list img.book-poster {
+  width: 210px !important;
+  height: 290px !important;
+}
