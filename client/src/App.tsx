@@ -24,8 +24,13 @@ import "@ionic/react/css/display.css";
 import "./theme/variables.css";
 
 import "./theme/index.css";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
 import AddBooks from "./pages/AddBooks";
 import EditBooks from "./pages/EditBooks";
+import BookById from "./pages/BookById";
+import GenreBookList from "./pages/GenreBookList";
+import SearchList from "./pages/SearchList";
 
 setupConfig({
   animated: true,
@@ -41,17 +46,82 @@ const App: React.FC = () => {
         <Menu selectedPage={selectedPage} />
         <IonRouterOutlet id="main">
           <Route
-            path="/page/add-books"
+            path="/page/books"
             render={props => {
               setSelectedPage(props.match.path);
-              return <AddBooks />;
+              return <Home />;
+            }}
+            exact={true}
+          />
+          {localStorage.loggedIn === "true" ? (
+            <>
+              <Route
+                path="/page/login"
+                render={() => <Redirect to="/page/books" />}
+                exact={true}
+              />
+              <Route
+                path="/page/add-books"
+                render={props => {
+                  setSelectedPage(props.match.path);
+                  return <AddBooks />;
+                }}
+                exact={true}
+              />
+              <Route
+                path="/page/edit-books/:id"
+                render={props => {
+                  return <EditBooks {...props} />;
+                }}
+                exact={true}
+              />
+            </>
+          ) : (
+            <>
+              <Route
+                path="/page/login"
+                render={props => {
+                  setSelectedPage(props.match.path);
+                  return <Login />;
+                }}
+                exact={true}
+              />
+              <Route
+                path="/page/add-books"
+                render={() => <Redirect to="/page/login" />}
+                exact={true}
+              />
+              <Route
+                path="/page/edit-books/:id"
+                render={() => <Redirect to="/page/login" />}
+                exact={true}
+              />
+            </>
+          )}
+          <Route
+            path="/"
+            render={() => <Redirect to="/page/books" />}
+            exact={true}
+          />
+          <Route
+            path="/page/books/:id"
+            render={props => {
+              return <BookById {...props} />;
             }}
             exact={true}
           />
           <Route
-            path="/page/edit-books/:id"
+            path="/page/books/genre/:genre"
             render={props => {
-              return <EditBooks {...props} />;
+              setSelectedPage(`/page/books/genre/${props.match.params.genre}`)
+              return <GenreBookList {...props} />;
+            }}
+            exact={true}
+          />
+          <Route
+            path="/page/books/:search_params/:name"
+            render={props => {
+              return <SearchList {...props} />;
             }}
             exact={true}
           />

@@ -27,16 +27,22 @@ ion-title {
 .book-single:hover {
   cursor: pointer;
 }
-.book-single:hover {
+.book-single-hover {
+  height: 5px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+.book-single:hover .book-single-hover {
   background-color: rgba(0, 0, 0, 0.6) !important;
-  transition: background-color ease-in 0.5s !important;
+  transition: background-color ease-in 0.3s !important;
 }
 .type-book-list .book-single:hover,
 .genre-book-list .book-single:hover {
   background-color: rgba(0, 0, 0, 0.6);
+  transition: background-color ease-in 0.3s !important;
 }
 .type-book-list .book-single:hover span h4,
 .type-book-list ion-card.book-single:hover span p {
   color: #fff !important;
-  transition: all ease-in 0.5s;
 }
