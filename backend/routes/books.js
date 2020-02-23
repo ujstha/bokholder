@@ -4,6 +4,99 @@ const { schemaValidator, Booklist } = require("../models/books");
 const { ImageUploader } = require("../image-uploader");
 const multer = require("multer");
 
+
+//fetching data
+router.get("/", async (req, res) => {
+  const books = await Booklist.find(req.body.id);
+  res.send(books);
+});
+
+router.get("/:id", async (req, res) => {
+  const book = await Booklist.findOne({
+    _id: req.params.id
+  });
+
+  res.status(200).send(book);
+});
+
+router.get("/book_type/:type", async (req, res) => {
+  const book = await Booklist.find({
+    type: req.params.type
+  });
+
+  if (book && book.length !== 0) {
+    res
+      .status(200)
+      .json({ booklist: book, total_books: book.length, status: 200 });
+  } else {
+    res.status(404).json({
+      msg: `Book with '${req.params.type}' type not found.`,
+      status: 404
+    });
+  }
+});
+
+router.get("/book_author/:author", async (req, res) => {
+  const book = await Booklist.find({
+    author: req.params.author
+  });
+
+  if (book && book.length !== 0) {
+    res
+      .status(200)
+      .json({ booklist: book, total_books: book.length, status: 200 });
+  } else {
+    res.status(404).json({
+      msg: `${req.params.author}'s book was not found.`,
+      status: 404
+    });
+  }
+});
+
+router.get("/genre/:genre", async (req, res) => {
+  const book = await Booklist.find({
+    genre: { $regex: req.params.genre }
+  });
+
+  if (book && book.length !== 0) {
+    res
+      .status(200)
+      .json({ booklist: book, total_books: book.length, status: 200 });
+  } else {
+    res.status(404).json({
+      msg: `Book with '${req.params.genre}' genre was not found.`,
+      status: 404
+    });
+  }
+});
+
+router.get("/search/:search_params/:name", async (req, res) => {
+  let book = [];
+  if (req.params.search_params === "book_name") {
+    book = await Booklist.find({
+      book_name: { $regex: req.params.name, $options: "-i" }
+    });
+  } else if (req.params.search_params === "author") {
+    book = await Booklist.find({
+      author: { $regex: req.params.name, $options: "-i"  }
+    });
+  } else if (req.params.search_params === "publisher") {
+    book = await Booklist.find({
+      publisher: { $regex: req.params.name, $options: "-i"  }
+    });
+  }
+  if (book && book.length !== 0) {
+    res
+      .status(200)
+      .json({ booklist: book, total_books: book.length, status: 200 });
+  } else {
+    res.status(404).json({
+      msg: `0 search results for '${req.params.name}'.`,
+      status: 404
+    });
+  }
+});
+
 //adding data
 router.post(
   "/",
