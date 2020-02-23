@@ -37,4 +37,49 @@ router.post(
   }
 );
 
+//updating data
+router.put(
+  "/:id",
+  multer({}).single("poster"),
+  (req, res, next) => {
+    ImageUploader(req, res, req.file, next, "update");
+  },
+  (req, res) => {
+    Booklist.findById(req.params.id, (err, book) => {
+      if (!book) res.status(404).json({ Error: "Data not found." });
+      else {
+        book.book_name = req.body.book_name || book.book_name;
+        book.poster = req.body.poster || book.poster;
+        book.author = req.body.author || book.author;
+        book.genre = req.body.genre || book.genre;
+        book.publisher = req.body.publisher || book.publisher;
+        book.type = req.body.type || book.type;
+        book.isbn = req.body.isbn || book.isbn;
+        book.description = req.body.description || book.description;
+        book.released = req.body.released || book.released;
+
+        book
+          .save()
+          .then(() =>
+            res.json({
+              booklist: book,
+              msg: `'${req.body.type}' updated successfully.`
+            })
+          )
+          .catch(err => res.status(400).json({ Error: err }));
+      }
+    });
+  }
+);
+
+//deleting data
+router.delete("/:id", async (req, res) => {
+  const book = await Booklist.findOne({ _id: req.params.id });
+  if (!book) return res.status(404).send("Data not found.");
+
+  await book
+    .remove()
+    .then(() => res.json({ msg: "Data deleted successfully." }));
+});
+
 module.exports = router;
